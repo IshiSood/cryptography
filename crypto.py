@@ -2,18 +2,32 @@
 # Arguments: string, integer
 # Returns: string
 def encrypt_caesar(plaintext, offset):
-    encryptKey = ['a', 'b', 'c', 'd'. 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
-                    'p', 'q', 'r', 's', 't', 'u', 'v', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     newText = []
     for i in plaintext:
-        newIndex = encryptKey.index(i)+offset
-        newText.append(encryptKey[newIndex])
+        newText.append(shift_letter(i, offset))
     return "".join(newText)
 
+def shift_letter(letter, offset):
+    key = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    newIndex = (key.index(letter) + offset)
+    if newIndex > 25:
+        newIndex -= 26
+    return key[newIndex]
+
+def shift_letter_back(letter, offset):
+    key = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    newIndex = (key.index(letter) - offset)
+    if newIndex < 0:
+        newIndex = 26 - offset
+    return key[newIndex]
 # Arguments: string, integer
 # Returns: string
 def decrypt_caesar(ciphertext, offset):
-    pass
+    #pass
+    newText = []
+    for i in ciphertext:
+        newText.append(shift_letter_back(i, offset))
+    return "".join(newText)
 
 # Vigenere Cipher
 # Arguments: string, string
@@ -49,7 +63,9 @@ def decrypt_mhkc(ciphertext, private_key):
 
 def main():
     # Testing code here
-    pass
+    #pass
+    #print(encrypt_caesar("python", 3))
+    print(decrypt_caesar("sbwkrq", 3))
 
 if __name__ == '__main__':
     main()
